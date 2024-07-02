@@ -1,0 +1,886 @@
+{% extends "base.html.twig"%}
+
+{% block title %}E-commerce{% endblock %}
+
+{% block body %}
+
+
+    <style>
+         body {
+            background-color: #FFFFFF; /* Changer la couleur de fond de la page */
+        }
+       
+
+        .about h1 {
+            font-size: 2.5rem; /* Taille de la police */
+            color: #EAF996; /* Couleur du texte */
+        }
+
+        .about p {
+            font-size: 1.2rem; /* Taille de la police */
+            color: #666; /* Couleur du texte */
+            background-color: #EAF996; /* Couleur de fond */
+            padding: 20px; /* Espacement autour du paragraphe */
+            border-radius: 10px; /* Coins arrondis */
+        }
+
+        .tab-content {
+            padding-top: 20px; /* Espacement en haut */
+        }
+
+        .tab-pane {
+            padding: 20px; /* Espacement autour du contenu */
+            border: 1px solid #ddd; /* Bordure autour du contenu */
+            border-radius: 10px; /* Coins arrondis */
+            background-color: #EAF996; /* Couleur de fond */
+            margin-top: 20px; /* Marge en haut */
+        }
+
+        .tab-pane h5 {
+            font-size: 1.5rem; /* Taille de la police */
+            color: #333; /* Couleur du texte */
+        }
+
+        .tab-pane p {
+            font-size: 1rem; /* Taille de la police */
+            color: #666; /* Couleur du texte */
+        }
+
+        .btn {
+            background-color: #007bff; /* Couleur de fond */
+            color: #FFFF; /* Couleur du texte */
+            border: none; /* Pas de bordure */
+            border-radius: 5px; /* Coins arrondis */
+            padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+            font-size: 1rem; /* Taille de la police */
+            text-decoration: none; /* Pas de soulignement */
+            display: inline-block; /* Affichage en ligne */
+            margin-top: 10px; /* Marge en haut */
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Couleur de fond au survol */
+            color: #FFFF; /* Couleur du texte au survol */
+        }
+        .featurs-icon {
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%; /* Rendre l'icône ronde */
+            width: 120px; /* Taille de l'icône */
+            height: 120px; /* Taille de l'icône */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFD700; 
+        }
+
+        .featurs-icon::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: 2px solid #FFD700; /* Couleur d'arrière-plan jaune */
+            border-radius: 50%;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            z-index: -1;
+        }
+
+        .featurs-icon i {
+           color: #fff;
+        }
+
+        .featurs-icon.bg-warning {
+         background-color: #FFD700; /* Couleur d'arrière-plan jaune */
+        }
+
+        .featurs-content h5, .featurs-content p {
+           color: #000; /* Couleur du texte noir */
+        }
+         .back-to-top {
+          position: fixed;
+          right: 30px;
+          bottom: 30px;
+          display: flex;
+           width: 45px;
+          height: 45px;
+          align-items: center;
+            justify-content: center;
+          transition: 0.5s;
+          z-index: 99;
+        }
+
+
+    
+
+      
+         /* CSS pour les boutons */
+.btn {
+    font-family: Arial, sans-serif; /* Utilisez une police de caractères appropriée */
+    font-size: 16px; /* Taille de la police */
+    font-weight: bold; /* Gras */
+    text-transform: uppercase; /* Convertit le texte en majuscules */
+    padding: 10px 20px; /* Espace intérieur du bouton */
+    border: none; /* Supprime la bordure */
+    border-radius: 5px; /* Arrondi les coins */
+    cursor: pointer; /* Curseur pointeur au survol */
+    transition: background-color 0.3s ease; /* Transition de couleur de fond fluide */
+}
+
+/* Style pour le bouton primaire */
+.btn-primary {
+    background-color: #007bff; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+}
+
+/* Style pour le bouton secondaire */
+.btn-secondary {
+    background-color: #6c757d; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+}
+
+/* Style pour le bouton de taille plus petite */
+.btn-sm {
+    font-size: 14px; /* Taille de la police réduite */
+    padding: 8px 16px; /* Espace intérieur réduit */
+}
+
+/* Style pour le bouton de taille plus grande */
+.btn-lg {
+    font-size: 18px; /* Taille de la police augmentée */
+    padding: 12px 24px; /* Espace intérieur augmenté */
+}
+/* CSS pour la section de prix */
+.price {
+    margin-top: 10px; /* Espace entre le texte et les prix */
+}
+
+
+.circle-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid black;
+        margin: 20px; /* Espace entre les cercles */
+        transition: transform 0.3s, box-shadow 0.3s; /* Transition pour les effets de survol */
+    }
+
+    .circle-img:hover {
+        transform: scale(1.1); /* Effet de survol : agrandir l'image */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Effet de survol : ajouter une ombre */
+    }
+
+
+
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #666;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    .row.cards-row {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 130px; /* Marge entre les deux lignes de cartes */
+    }
+
+    .col-md-3 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .row.cards-row {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px; /* Augmentez cette valeur pour plus d'espace */
+    }
+    .row.my-5 {
+    margin-top: 150px;
+    margin-left: 150px; /* Ajoute une marge à gauche de la section */
+    } 
+    .row.my-5 .col-md-4 {
+    margin-bottom: 80px; /* Marge entre chaque ligne de cartes */
+    }
+    /* Featured Products Section */
+.featured-products {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.featured-products h2 {
+    color: #333;
+}
+
+.featured-products .card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featured-products .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.featured-products .card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+.featured-products .card-body {
+    padding: 1.5rem;
+}
+
+.featured-products .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.featured-products .card-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+.featured-products .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+.top-image-container {
+        position: relative; /* Position relative pour permettre le positionnement absolu du texte */
+        width: 100%;
+        height: 300px;
+        background-color: #c6e2e9; /* Couleur de fond */
+        padding: 10px; /* Ajoutez un peu de marge */
+    }
+
+    .top-image  {
+    position: absolute;
+    top: 10;
+    right: 40px;
+    width: 40%;
+    z-index: 999; /* Assurez-vous que l'image est au-dessus du contenu */
+}
+
+    .top-image-container .first-line {
+        position: absolute; /* Position absolue pour la première ligne de texte */
+        top: 50%; /* Positionnez la première ligne de texte au milieu de son conteneur parent */
+        transform: translateY(-50%); /* Déplacez la première ligne de texte vers le haut de 50% de sa propre hauteur pour la centrer verticalement */
+        left: 30px; /* Positionnez la première ligne de texte à gauche du conteneur parent */
+        color: #333; /* Couleur du texte sombre */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police de caractères */
+        font-size: 36px; /* Taille de la police de la première ligne */
+        font-weight: bold; /* Texte en gras */
+        text-transform: uppercase; /* Mettre le texte en majuscules */
+        letter-spacing: 2px; /* Espacement entre les lettres */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombre du texte */
+        line-height: 1.2; /* Hauteur de ligne pour un espacement amélioré */
+    }
+
+    .top-image-container .second-line {
+        position: absolute; /* Position absolue pour la deuxième ligne de texte */
+        top: calc(50% + 20px); /* Positionnez la deuxième ligne de texte en dessous de la première ligne */
+        left: 150px; /* Positionnez la deuxième ligne de texte à gauche du conteneur parent */
+        color: #333; /* Couleur du texte sombre */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police de caractères */
+        font-size: 24px; /* Taille de la police de la deuxième ligne */
+        font-style: italic;
+        margin-top:10px;
+    }
+    .why-choose-section {
+  padding: 7rem 0; }
+  .why-choose-section .img-wrap {
+    position: relative; }
+    .why-choose-section .img-wrap:before {
+      position: absolute;
+      content: "";
+      width: 255px;
+      height: 217px;
+      background-image: url("../image/dots-yellow.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      -webkit-transform: translate(-40%, -40%);
+      -ms-transform: translate(-40%, -40%);
+      transform: translate(-40%, -40%);
+      z-index: -1; }
+    .why-choose-section .img-wrap img {
+      border-radius: 20px; }
+
+
+
+    /* Style CSS pour la section de produits */
+
+
+
+
+
+
+
+
+
+
+.why-choose-section {
+  padding: 7rem 0;
+  margin-top:80px;
+   }
+  .why-choose-section .img-wrap {
+     margin-top:80px;
+     margin-left:40px;
+    position: relative; }
+    .why-choose-section .img-wrap:before {
+      position: absolute;
+     
+      content: "";
+      width: 255px;
+      height: 217px;
+      background-image: url("../image/dots-yellow.svg");
+      
+      background-repeat: no-repeat;
+      background-size: contain;
+      -webkit-transform: translate(-40%, -40%);
+      -ms-transform: translate(-40%, -40%);
+      transform: translate(-40%, -40%);
+      z-index: -1; }
+    .why-choose-section .img-wrap img {
+        margin-left:40px;
+        margin-right:40px;
+      border-radius: 20px; }
+
+.feature {
+  margin-bottom: 30px; }
+  .feature .icon {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px; }
+    .feature .icon:before {
+      content: "";
+      width: 33px;
+      height: 33px;
+      position: absolute;
+      background: rgba(59, 93, 80, 0.2);
+      border-radius: 50%;
+      right: -8px;
+      bottom: 0; }
+  .feature h3 {
+    font-size: 14px;
+    color: #2f2f2f; }
+  .feature p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #6a6a6a; }
+
+
+
+
+
+.we-help-section {
+  padding: 7rem 0; }
+  .we-help-section .imgs-grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[27];
+    grid-template-columns: repeat(27, 1fr);
+    position: relative; }
+    .we-help-section .imgs-grid:before {
+      position: absolute;
+      content: "";
+      width: 255px;
+      height: 217px;
+      background-image: url("../image/dots-green.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      -webkit-transform: translate(-40%, -40%);
+      -ms-transform: translate(-40%, -40%);
+      transform: translate(-40%, -40%);
+      z-index: -1; }
+    .we-help-section .imgs-grid .grid {
+      position: relative; }
+      .we-help-section .imgs-grid .grid img {
+        border-radius: 20px;
+        max-width: 100%; }
+      .we-help-section .imgs-grid .grid.grid-1 {
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 18;
+        grid-column: 1 / span 18;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 27;
+        grid-row: 1 / span 27; }
+      .we-help-section .imgs-grid .grid.grid-2 {
+        -ms-grid-column: 19;
+        -ms-grid-column-span: 27;
+        grid-column: 19 / span 27;
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 5;
+        grid-row: 1 / span 5;
+        padding-left: 20px; }
+      .we-help-section .imgs-grid .grid.grid-3 {
+        -ms-grid-column: 14;
+        -ms-grid-column-span: 16;
+        grid-column: 14 / span 16;
+        -ms-grid-row: 6;
+        -ms-grid-row-span: 27;
+        grid-row: 6 / span 27;
+        padding-top: 20px; }
+
+    
+     .custom-list {
+     width: 100%; }
+     .custom-list li {
+      display: inline-block;
+      width: calc(50% - 20px);
+      margin-bottom: 12px;
+     line-height: 1.5;
+     position: relative;
+      padding-left: 20px; }
+     .custom-list li:before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid #3b5d50;
+      position: absolute;
+      left: 0;
+      top: 8px; }
+
+
+
+
+
+
+/* Footer */
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.footer h1,
+.footer h4 {
+    color: #e2af18; /* Moutarde */
+}
+
+.footer-item p {
+    font-size: 14px;
+}
+
+.footer-item a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-item a:hover {
+    color: #87ceeb; /* Bleu ciel */
+    text-decoration: underline;
+}
+
+.footer-item img {
+    max-width: 150px;
+    margin-top: 20px;
+}
+
+/* Footer Subscribe Form */
+.footer input.form-control {
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+}
+
+.footer button.btn-primary {
+    border-radius: 25px;
+    background-color: #e2af18; /* Moutarde */
+    border: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.footer button.btn-primary:hover {
+    background-color: #c49415; /* Moutarde plus foncé */
+}
+
+/* Copyright */
+.copyright {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #fff;
+}
+
+/* Social Icons */
+.footer-social-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.footer-social-icons a {
+    margin-right: 10px;
+    font-size: 24px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+    color: #87ceeb; /* Bleu ciel */
+}
+
+/* Footer Title Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer h1 {
+    animation: fadeInUp 1s forwards;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .footer {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .footer h1,
+    .footer h4 {
+        text-align: center;
+    }
+
+    .footer .row {
+        text-align: center;
+    }
+
+    .footer-social-icons {
+        justify-content: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</style>
+<!-- Votre contenu HTML ici -->
+
+
+
+
+
+<div class="top-image-container">
+      <p class="first-line">Revivez vos espaces</p>
+    <p class="second-line">  ❝ avec une touche de génie décoratif ❞</p>
+    <img src="image/couch.png" alt="Photo" class="top-image">
+    <!-- Vous pouvez ajouter d'autres éléments ici -->
+</div>
+
+
+
+
+<!-- Start Why Choose Us Section -->
+		<div class="why-choose-section " >
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-6">
+						<h2 class="section-title">Pourquoi Ma maison ?</h2>
+						<p>En choisissant notre site de décoration, vous pouvez être sûr de trouver des produits de qualité, un service exceptionnel et une expérience d'achat agréable.</p>
+
+						<div class="row my-5">
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="image/truck.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Rapide &amp; livraison gratuite</h3>
+									<p> vous bénéficiez non pas d'une livraison rapide et gratuite, mais aussi d'une expérience d'achat fluide .</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="image/bag.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>facile </h3>
+									<p> expérience d'achat aussi simple que possible. Avec une interface conviviale et intuitive.</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="image/support.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>24/7 Support</h3>
+									<p>Notre équipe de support client est disponible 24 heures sur 24, 7 jours sur 7, pour répondre à toutes vos questions .</p>
+								</div>
+							</div>
+
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="image/return.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>retour gratuit</h3>
+									<p>vous pouvez retournez au cas de probléme gratuitement.</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-lg-5">
+						<div class="img-wrap">
+							<img src="image/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Why Choose Us Section -->
+
+
+
+
+<div class="row justify-content-center" style="margin-top:100px ">
+    <div class="col-12 mb-4">
+        <h2 class="mb-4 section-title" style="font-size: 2rem; color: #333; font-weight: bold;text-align:center">Découvrez nos produits</h2> <!-- Ajout de styles CSS personnalisés pour le titre -->
+        
+    </div>
+    {% set count = 0 %}
+    {% if products|length %}
+        {% for product in products %}
+            {% if count < 3 %}
+                <div class="col-md-3 mb-4 mx-auto"> <!-- Redéfinition de la classe de la colonne pour réduire la largeur -->
+                    <div class="card product-card">
+                        <div class="card-body">
+                            {% if product.image %}
+                                <img src="{{ photo_url ~ product.image }}" alt="{{ product.name }}" class="card-img-top">
+                            {% else %}
+                                <img src="{{ photo_url ~ 'flowers.png' }}" alt="{{ product.name }}" class="card-img-top">
+                            {% endif %}
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <h5><span class="text text-danger">{{ product.price }}DH</span></h5>
+                            <a href="{{ path('order_store', {'product': product.id}) }}" class="btn btn-primary">Acheter</a>
+                        </div>
+                    </div>
+                </div>
+                {% set count = count + 1 %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No products found!
+            </div>
+        </div>
+    {% endif %}
+    <a href="{{ path('app_categories')}}"  class="btn btn-primary float-right">Voir plus</a>
+</div>
+
+
+
+
+
+
+<!-- Start We Help Section -->
+		<div class="we-help-section" style ="margin-top:100px" >
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-7 mb-5 mb-lg-0">
+						<div class="imgs-grid">
+							<div class="grid grid-1"><img src="image/img-grid-1.jpg" alt="Untree.co"></div>
+							<div class="grid grid-2"><img src="image/img-grid-2.jpg" alt="Untree.co"></div>
+							<div class="grid grid-3"><img src="image/img-grid-3.jpg" alt="Untree.co"></div>
+						</div>
+					</div>
+					<div class="col-lg-5 ps-lg-5">
+						<h2 class="section-title mb-4">Nous vous aidons à créer un design d'intérieur moderne</h2>
+						<p>Découvrez une nouvelle ère de design intérieur avec notre expertise dédiée</p>
+
+						<ul class="list-unstyled custom-list my-4">
+							<li>Créez l'Élégance Moderne </li>
+							<li>Transformez Votre Espace avec Style</li>
+							<li>L'Art du Design Contemporain</li>
+							<li>Explorez l'Innovation en Design </li>
+						</ul>
+						<p><a herf="#" class="btn">Explore</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End We Help Section -->
+
+
+
+
+
+
+<div class="footer">
+            <div class="container py-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <h1 class="text-primary mb-0">Ma maison</h1>
+                            </a>
+                        </div>
+                        
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Why People Like us!</h4>
+                            <p class="mb-4">typesetting, remaining essentially unchanged. It was 
+                                popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Shop Info</h4>
+                            <a class="btn-link" href="">About Us</a>
+                            <a class="btn-link" href="">Contact Us</a>
+                            <a class="btn-link" href="">Privacy Policy</a>
+                            <a class="btn-link" href="">Terms & Condition</a>
+                            <a class="btn-link" href="">Return Policy</a>
+                            <a class="btn-link" href="">FAQs & Help</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Account</h4>
+                            <a class="btn-link" href="">My Account</a>
+                            <a class="btn-link" href="">Shop details</a>
+                            <a class="btn-link" href="">Shopping Cart</a>
+                            <a class="btn-link" href="">Wishlist</a>
+                            <a class="btn-link" href="">Order History</a>
+                            <a class="btn-link" href="">International Orders</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Contact</h4>
+                            <p>Address:avenue moulay aziz</p>
+                            <p>Email: mamaison@gmail.com</p>
+                            <p>Phone: +0123 4567 8910</p>
+                            <p>Payment Accepted</p>
+                            <img src="image/payment.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-end text-white">
+                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+
+
+
+    
+
+
+    
+    
+       
+       
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>  
+
+
+        
+      
+   
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders List{% endblock %}
+
+{% block body %}
+    <style>
+        /* Custom CSS for Orders List */
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #fff;
+            border-radius: 15px 15px 0 0;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+
+        .table th {
+            background-color: #343a40;
+            font-weight: bold;
+            text-align: left;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .table td {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-toggle {
+            background-color: #007bff !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 5px 10px !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s ease !important;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: #0056b3 !important;
+        }
+
+        .dropdown-menu {
+            border-radius: 5px !important;
+        }
+
+        .dropdown-item {
+            color: #333 !important;
+            transition: background-color 0.3s ease !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa !important;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        Orders List
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ order.user.email }}</td>
+                                        <td>{{ order.pname }}</td>
+                                        <td>{{ order.price }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {{ order.status }}
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="{{ path('order_status_update',{order: order.id,status: 'shipped'}) }}">Shipped</a></li>
+                                                    <li><a class="dropdown-item" href="{{ path('order_status_update',{order: order.id,status: 'rejected'}) }}">Rejected</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <form id="{{ order.id }}" action="{{ path('order_delete',{order: order.id}) }}" method="post"></form>
+                                            <button onclick="deleteItem('{{ order.id }}')" class="btn-delete">Delete</button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('image/back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+           
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            margin-top:40px;
+            width: 400px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Styles du formulaire */
+        form {
+            margin-top: 20px;
+        }
+        .form-group label {
+          margin-bottom: 30px; /* Augmentez cette valeur pour plus d'espace si nécessaire */
+        }
+
+
+        label {
+            position: relative;
+            color: #555;
+            font-size: 16px;
+            transition: top 0.3s ease, font-size 0.3s ease;
+            top: 20px;
+            display: block;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-bottom: 2px solid #007bff;
+            background-color: transparent;
+            transition: border-bottom-color 0.3s ease;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            border-bottom-color: #0056b3;
+            outline: none;
+        }
+
+        input[type="email"]:focus + label,
+        input[type="email"]:not(:placeholder-shown) + label {
+            top: 5px;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-sign-in-alt"></i> Please sign in</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            
+            <div class="form-group">
+               <label>Email</label>
+                
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+               
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                
+            </div>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            <button class="btn btn-lg btn-primary" type="submit">
+                Sign in
+            </button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            
+            padding: 0;
+            background-image: url('image/back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            margin-top:40px;
+            width: 400px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Styles du formulaire */
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            position: relative;
+            color: #555;
+            font-size: 16px;
+            transition: top 0.3s ease, font-size 0.3s ease;
+            top: 20px;
+            display: block;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-bottom: 2px solid #007bff;
+            background-color: transparent;
+            transition: border-bottom-color 0.3s ease;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            border-bottom-color: #0056b3;
+            outline: none;
+        }
+
+        input[type="email"]:focus + label,
+        input[type="email"]:not(:placeholder-shown) + label {
+            top: 5px;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Icones */
+        .fa-user,
+        .fa-lock {
+            position: relative;
+            top: 4px;
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+        /* Personnalisation des éléments */
+        .form-group {
+            position: relative;
+            margin-bottom: 60px; /* Augmentation de l'espace entre les champs */
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #007bff;
+            background-color: transparent;
+            font-size: 16px;
+            color: #555;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-bottom-color: #0056b3;
+            outline: none;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 16px;
+            left: 0;
+            font-size: 16px;
+            color: #777;
+            pointer-events: none;
+            transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: 5px;
+            font-size: 12px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-user"></i> Register</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Your email'}}) }}
+                
+            </div>
+            <div class="form-group">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Your password'}}) }}
+               
+            </div>
+           
+            <button type="submit" class="btn"><i class="fas fa-user-plus"></i> Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products List{% endblock %}
+
+{% block body %}
+    <style>
+        /* Custom CSS for Products List */
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #fff;
+            border-radius: 15px 15px 0 0;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+
+        .table th {
+            background-color: #343a40;
+            font-weight: bold;
+            text-align: left;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .table td {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .btn-add {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-add:hover {
+            background-color: #218838;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>List of products</span>
+                            <a href="{{ path('product_store') }}" class="btn btn-sm btn-primary btn-add">Add</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.category.name }}</td>
+                                        <td>{{ product.quantite }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>
+                                            {% if product.image %}
+                                                <img src="{{ absolute_url('uploads/' ~ product.image) }}" alt="product" width="60" height="60" class="fluid my-2 rounded">
+                                            {% endif %}
+                                        </td>
+                                        <td class="d-flex justify-content-around align-items-center">
+                                            <form id="{{ product.id }}" action="{{ path('product_delete', { id: product.id }) }}" method="post"></form>
+                                            <button onclick="deleteItem('{{ product.id }}')" class="btn btn-sm btn-danger btn-delete">Delete</button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
